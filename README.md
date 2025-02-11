@@ -122,7 +122,7 @@ Static version:
 MoshiPack.pack(anyObject)
 ```
 
-### packToByeArray
+### packToByteArray
 
 If you prefer to get a ```ByteArray``` instead of a ```BufferedSource``` you can use this method.
 
