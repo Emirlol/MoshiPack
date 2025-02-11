@@ -6,18 +6,18 @@ MoshiPack
 ### Gradle
 
 
-```
-implementation com.daveanthonythomas.moshipack:moshipack:1.0.1
+```kotlin
+implementation("com.daveanthonythomas.moshipack:moshipack:1.0.1")
 ```
 
 Optional Retrofit support:
-```
-implementation com.daveanthonythomas.moshipack:moshipack-retrofit:1.0.1
+```kotlin
+implementation("com.daveanthonythomas.moshipack:moshipack-retrofit:1.0.1")
 ```
 
 ## About
 
-This is a Kotilin implementation of MessagePack serialization and deserialization built ontop of Moshi to take advantage of Moshi's type adapters and utilizes okio for reading and writing MessagePack bytes.
+This is a Kotlin implementation of MessagePack serialization and deserialization built on top of Moshi to take advantage of Moshi's type adapters and utilizes okio for reading and writing MessagePack bytes.
 
 The library is intended to be consumed in a Kotlin project, and is not intended for Java use.
 
@@ -149,7 +149,7 @@ val unpacked: T = MoshiPack().unpack(byteArray)
 
 Static version:
 ```kotlin
-val unpacked: T = MoshiPack.upack(byteArray)
+val unpacked: T = MoshiPack.unpack(byteArray)
 ```
 
 Instance version:
@@ -159,10 +159,10 @@ val unpacked: T = MoshiPack().unpack(bufferedSource)
 
 Static version:
 ```kotlin
-val unpacked: T = MoshiPack.upack(bufferedSource)
+val unpacked: T = MoshiPack.unpack(bufferedSource)
 ```
 
-T can be an Object, a List, a Map, and can include generics. Unlike ```Moshi``` you do not need to specify a parameterized type to deserialize to a List with generics. ```MoshiPack``` can infer the paramterized type for you. 
+T can be an Object, a List, a Map, and can include generics. Unlike ```Moshi``` you do not need to specify a parameterized type to deserialize to a List with generics. ```MoshiPack``` can infer the parameterized type for you. 
 
 The following examples are valid for ```MoshiPack```:
 
@@ -188,7 +188,7 @@ val car: Map<Any, Any> = MoshiPack.unpack(carBytes)
 
 ### msgpackToJson
 
-Convert directly from MessagePack bytes to JSON. Use this method for the most effecient implementation as no objects are instantiated in the process. This uses the ```FormatInterchange``` class to match implementations of ```JsonReader``` and a ```JsonWriter```. If you wanted to say support XML as a direct conversion to and from, you could implement Moshi's ```JsonReader``` and ```JsonWriter``` classes and use the ```FormatInterchange``` class to convert directly to other formats. **Returns** ```String``` containing a JSON representation of the MessagePack data
+Convert directly from MessagePack bytes to JSON. Use this method for the most efficient implementation as no objects are instantiated in the process. This uses the ```FormatInterchange``` class to match implementations of ```JsonReader``` and a ```JsonWriter```. If you wanted to, say, support XML as a direct conversion to and from, you could implement Moshi's ```JsonReader``` and ```JsonWriter``` classes and use the ```FormatInterchange``` class to convert directly to other formats. **Returns** ```String``` containing a JSON representation of the MessagePack data
 
 Instance versions: (takes ```ByteArray``` or ```BufferedSource```)
 ```kotlin
@@ -210,7 +210,7 @@ MoshiPack.msgpackToJson(bufferedSource)
 
 ### jsonToMsgpack
 
-Convert directly from JSON to MessagePack bytes. Use this method for the most effecient implementation as no objects are instantiated in the process. **Returns** ```BufferedSource``` 
+Convert directly from JSON to MessagePack bytes. Use this method for the most efficient implementation as no objects are instantiated in the process. **Returns** ```BufferedSource``` 
 
 Instance versions: (takes ```String``` or ```BufferedSource```)
 ```kotlin
@@ -271,10 +271,10 @@ val moshiPack = MoshiPack().apply {
 Kotiln Support
 --------------
 
-Since this library is intended for Kotlin use, the ```moshi-kotlin``` artifact is included as a depedency. A ```KotlinJsonAdapterFactory``` is added by default to the instantiated ```Moshi``` that ```MoshiPack``` uses.
-This adapter allows for the use of ```Moshi```'s annotaions in Kotlin. To learn more about it see the [```Moshi```](https://github.com/square/moshi) documentation.
+Since this library is intended for Kotlin use, the ```moshi-kotlin``` artifact is included as a dependency. A ```KotlinJsonAdapterFactory``` is added by default to the instantiated ```Moshi``` that ```MoshiPack``` uses.
+This adapter allows for the use of ```Moshi```'s annotations in Kotlin. To learn more about it see the [```Moshi```](https://github.com/square/moshi) documentation.
 
-If you'd like to use ```Moshi``` with out a ```KotlinJsonAdapterFactory``` supply a ```Moshi``` instance for ```MoshiPack```:
+If you'd like to use ```Moshi``` without a ```KotlinJsonAdapterFactory```, supply a ```Moshi``` instance for ```MoshiPack```:
 ```kotlin
 MoshiPack(moshi = Moshi.Builder().build)
 ```
@@ -300,5 +300,5 @@ If you are using ProGuard you might need to add the following options:
 Retrofit
 --------
 
-An example of using the retorfit adapter can be found here:
+An example of using the retrofit adapter can be found here:
 https://github.com/davethomas11/MoshiPack_AndroidAppExample
